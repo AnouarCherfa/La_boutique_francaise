@@ -16,8 +16,7 @@ class RegisterController extends AbstractController
     ## argument indique à Symfony d'injecter le service Doctrine dans la méthode du controller (RegisterController)
     public function __construct(private ManagerRegistry $doctrine)
     {
-        $this->doctrine = $doctrine;
-                
+
     }
 
 
@@ -30,25 +29,30 @@ class RegisterController extends AbstractController
         ## Créer un formulaire avec la classe RegisterType et la classe $User
         $form = $this->createForm(RegisterType::class, $User);
 
-        ## injecter les données soumisent à form 
-        $form->handleRequest($request);
+        ## Récupérer les données du formulaire
+        ($form->handleRequest($request));
 
         ## Si le formulaire est soumit et valider ...
         if ($form->isSubmitted() && $form->isValid()) {
 
-            ## injecter les données du formulaire à l'objet $user
-            $user = $form->getdata();
+            ## injecter les données du formulaire à l'objet $utilisateur
+            $utilisateur = $form->getdata();
 
             ## Récupérer l'objet gestionnaire d'entités de Doctrine
             $doctrine = $this->doctrine->getManager();
             ## Enregistre les données de l'objet $user 
-            $doctrine->persist($user);
+            $doctrine->persist($utilisateur);
             ## injecter dans la base de données
             $doctrine->flush();
+
+            
         }
 
+        ## Affiches moi le template register
         return $this->renderForm('register/index.html.twig', [
-            'form' => $form,
+            ## la clé monformulaire a comme valeur l'objet creatview de la function $form
+            'monformulaire' => $form,
+            
         ]);
     }
 

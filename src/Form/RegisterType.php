@@ -49,7 +49,7 @@ class RegisterType extends AbstractType
             ])
 
             ->add('submit', SubmitType::class, [
-                'label' => "s'incsrire",
+                'label' => "S'incsrire",
             ])
         ;
     }
