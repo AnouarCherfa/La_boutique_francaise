@@ -44,8 +44,18 @@ class RegisterType extends AbstractType
                 'invalid_message'   => 'Le mot de passe et la coonfirmation doivent etre identique.',
                 'label'             => 'Votre mot de passe',
                 'required'          => true,
-                'first_options'       => ['label'    => 'Mot de passe'],
-                'second_options'     => ['label'    => 'Confirmez votre mot de passe']
+                'first_options'       => [
+                    'label'    => 'Mot de passe',
+                    'attr'     => [
+                        'placeholder' => 'Merci de saisir votre mot de passe.'
+                    ]
+                ],
+                'second_options'     => [
+                    'label'    => 'Mot de passe',
+                    'attr'     => [
+                        'placeholder' => 'Merci de confirmer votre mot de passe.'
+                    ]
+                ]
 
             ])
             ->add('submit', SubmitType::class, [
