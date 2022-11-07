@@ -2,16 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Form\ChangePasswordType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class AccountPasswordController extends AbstractController
 {
@@ -26,6 +23,7 @@ class AccountPasswordController extends AbstractController
 
         $form = $this->createForm(ChangePasswordType::class, $user);
 
+        $notification = null; 
 
         ## Ecouter et manipuler la requete entrante
         $form->handleRequest($request);
@@ -34,12 +32,11 @@ class AccountPasswordController extends AbstractController
 
             $old_passeword = $form->get('old_password')->getData();
 
-            
 
             if ($hasher->isPasswordValid($user,$old_passeword))
             {
 
-                // Nouveau Mor de passe en claire : 
+                // Nouveau mot de passe en claire : 
 
                 $new_password_en_clair = $form->get('new_password')->getData();
 
@@ -51,14 +48,18 @@ class AccountPasswordController extends AbstractController
 
                 $this->doctrine->getManager()->persist($user);
                 $this->doctrine->getManager()->flush();
-
+                
+                $notification ='Votre mot de passe a bien été mis à jour.';
+            }else {
+                $notification = 'Votre mot de passe actuel n\'est pas le bon.';
             }
 
 
         }
 
         return $this->renderForm('account/password.html.twig', [
-            'form'  => $form
+            'form'          => $form,
+            'notification'  => $notification
         ]);
     }
 }
