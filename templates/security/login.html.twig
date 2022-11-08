@@ -21,23 +21,21 @@
     <input type="password" name="password" id="inputPassword" class="form-control" placeholder ='Votre mot de passe' autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
+           value="{{ csrf_token('authenticate') }}">
 
     <hr>
     <button class="btn btn-lg btn-primary btn-sm" type="submit">
         Se connecter
     </button>
 </form>
+{% endblock %}
+
+{% block footer %}
+    <footer class="footer-login-inscription">
+                <p>
+                    &copy; 2020-2022 La Boutique Française</br>
+                    <small>La boutique 100% made in France</br> 
+                        <a href="#">Privacy</a> &middot; <a href="#">Terms</a></small>
+                </p>
+            </footer>
 {% endblock %}
