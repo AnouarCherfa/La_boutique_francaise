@@ -33,10 +33,13 @@ class RegisterController extends AbstractController
 
             $utilisateur = $form->getdata();
 
-            ## Hasher le Password
-            $password = $hasher->hashPassword($User, $User->getPassword());
-            $User->setPassword($password);
+                // Hasher le Password
 
+            ## Récuperer le password dans l'objet $User, le hasher et l'enregistrer dans la variable $password 
+            $password = $hasher->hashPassword($User, $User->getPassword());
+            # Injecter le password hasher dans l'objet $User
+            $User->setPassword($password);
+            
             $doctrine = $this->doctrine->getManager();
             $doctrine->persist($utilisateur);
             $doctrine->flush();
