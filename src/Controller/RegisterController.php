@@ -26,6 +26,7 @@ class RegisterController extends AbstractController
         $User = new User();       
         $form = $this->createForm(RegisterType::class, $User);
 
+        ##Gérer le traitement de la saisie du formulaire
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -39,6 +40,10 @@ class RegisterController extends AbstractController
             $doctrine = $this->doctrine->getManager();
             $doctrine->persist($utilisateur);
             $doctrine->flush();
+
+            ## Une fois le formulaire soumit redirection a la page de connexion
+            return $this->redirectToRoute('app_login');
+            
         }
 
         ## Affiches moi le template register
