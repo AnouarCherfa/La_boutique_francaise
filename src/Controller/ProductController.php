@@ -22,8 +22,10 @@ class ProductController extends AbstractController
 
     #[Route('/nos-produits', name: 'products')]
     public function index(Request $request): Response
-    {
-        $search = new Search();
+    { 
+        // Cr&er le formulaire de recherche des produits 
+
+         $search = new Search();
         $form = $this->createForm( SearchType::class, $search);
 
         ## Ecouter si le formulaire a été soumit

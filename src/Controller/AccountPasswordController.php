@@ -37,7 +37,6 @@ class AccountPasswordController extends AbstractController
             {
 
                 // Nouveau mot de passe en claire : 
-
                 $new_password_en_clair = $form->get('new_password')->getData();
 
                 // Hash le mot de passe

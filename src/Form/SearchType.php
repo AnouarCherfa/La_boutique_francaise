@@ -24,7 +24,8 @@ class SearchType extends AbstractType
                     'placeholder'   => 'Votre recherche ...',
                     'Class'         => 'form-control-sm'
                 ]
-                ])
+            ])
+            ## liéer l'input a la classe Category
             ->add('categories', EntityType::class, [
                 'label'     => false,
                 'required'  => false,
